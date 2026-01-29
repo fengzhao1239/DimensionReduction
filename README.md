@@ -1,4 +1,4 @@
-# Functional Neural Field (FCNF) Pretraining
+# Dimensionality Reduction
 
 A PyTorch framework for training Functional Autoencoders and Neural Fields on physical datasets. This repository supports various architectures including SIREN, Transolver, and Perceiver, with integrated quantization (VQ/FSQ) capabilities.
 
