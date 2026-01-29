@@ -1,0 +1,85 @@
+data:
+  dataset_name: "KolmogorovFlow_ST"
+  data_dir: "/ehome/zhao/pretrain/mycode/dataset/datasets/HIT/kolmogorov_flow.h5"
+  norm_dir: "/ehome/zhao/pretrain/mycode/norm_dir/hit_norm"
+  norm_method: "-11"
+  masking_strategy: "random"
+
+
+
+  num_input_frames: 8
+  chunk_stride: 4
+
+model:
+  # encoder input spec
+  coord_dim: 2
+  func_dim: 1
+  num_input_frames: 8
+  # token widths
+  hidden_dim: 256
+  latent_dim: 32
+  num_latent_frames: 4
+  num_spatial_latents: 256
+  # decoder output spec
+  output_feature_dim: 1
+  # encoder knobs
+  enc_num_spatial_cross_attn_layers: 3
+  enc_num_spatial_self_attn_layers: 0
+  enc_num_pre_tcn_blocks: 2
+  enc_kernel_size: 3
+  enc_pre_dilations: [1, 2]
+  # decoder knobs
+  dec_num_spatial_cross_attn_layers: 3
+  dec_num_query_self_attn_layers: 0
+  dec_num_post_tcn_blocks: 2
+  dec_kernel_size: 3
+  dec_post_dilations: [1, 2]
+  # other knobs
+  num_heads: 8
+  dropout: 0.0
+  fourier_embed_dim: 128
+  fourier_sigma: 1.0
+  fourier_learnable: false
+  # quantizer_cfg: 
+  #   type: "fsq"
+  #   num_tokens: 1024
+  #   codebook_dim: 32
+  #   commitment_loss_weight: 0.25
+  #   straight_through: True
+
+training:
+  learning_rate: 1e-4
+  weight_decay: 1e-2
+  batch_size: 256
+  max_steps: 300000
+  warmup_steps: 500
+  check_val_every_n_epoch: 1
+  save_every_n_train_steps: 10000
+  seed: 42
+  num_workers: 4
+  accelerator: "gpu"
+  devices: 4
+  strategy: "auto"
+  precision: "16-mixed"
+  gradient_clip_val: 1.0
+  accumulate_grad_batches: 1
+  beta: 0.000
+  use_lipschitz: false
+  lipschitz_coeff: 1e-2
+
+logging:
+  project: "KolmogorovFlow"
+  entity: "isfengzhao-cornell-university"
+  # save_every_n_steps: 5000
+  # checkpoint_every_n_steps: 5000 
+  output_dir: "checkpoints"
+
+
+
+# huggingface:
+#   push_to_hub: false
+#   repo_name: "zebra-vqvae1d"
+#   private: true
+#   commit_message: "Add VQVAE1D tokenizer"
+#   model_card: "tokenizer_model_card.md"
+#   model_card_template: "tokenizer_model_card.md"

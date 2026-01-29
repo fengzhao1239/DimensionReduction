@@ -1,0 +1,73 @@
+# Checkpoints and model weights
+checkpoints/
+*.ckpt
+*.pth
+*.pt
+*.h5
+*.pb
+
+# Experiment tracking
+wandb/
+outputs/
+
+# Dataset files
+dataset/datasets/
+*.npy
+*.npz
+*.hdf5
+*.h5
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+*.log
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Normalization data
+norm_dir/
+
+# Additional folders to exclude
+BAO/
+assets/

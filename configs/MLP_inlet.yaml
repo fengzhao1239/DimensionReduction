@@ -1,0 +1,54 @@
+data:
+  dataset_name: "TurbulentInlet"
+  data_dir: "/ehome/zhao/pretrain/zebra/mydataset/IL_train.npz"
+  norm_dir: "/ehome/zhao/pretrain/mycode/norm_dir/inlet_norm"
+  norm_method: "-11"
+  masking_strategy: "complement"
+  encoder_point_ratio: -1
+
+model:
+  coord_features: 2
+  field_features: 1
+  latent_features: 512
+  encoder_num_hidden_layers: 3
+  encoder_hidden_features: 256
+  decoder_num_hidden_layers: 5
+  decoder_hidden_features: 256
+  use_lipschitz: True
+
+training:
+  learning_rate: 1e-4
+  weight_decay: 1e-3
+  batch_size: 256
+  max_steps: 300000
+  warmup_steps: 0
+  check_val_every_n_epoch: 10
+  save_every_n_train_steps: 10000
+  seed: 42
+  num_workers: 4
+  accelerator: "gpu"
+  devices: 4
+  strategy: "auto"
+  precision: "32"
+  gradient_clip_val: 1.0
+  accumulate_grad_batches: 1
+  beta: 0.000
+  use_lipschitz: True
+  lipschitz_coeff: 1e-2
+
+logging:
+  project: "InletData"
+  entity: "isfengzhao-cornell-university"
+  # save_every_n_steps: 5000
+  # checkpoint_every_n_steps: 5000 
+  output_dir: "checkpoints"
+
+
+
+# huggingface:
+#   push_to_hub: false
+#   repo_name: "zebra-vqvae1d"
+#   private: true
+#   commit_message: "Add VQVAE1D tokenizer"
+#   model_card: "tokenizer_model_card.md"
+#   model_card_template: "tokenizer_model_card.md"

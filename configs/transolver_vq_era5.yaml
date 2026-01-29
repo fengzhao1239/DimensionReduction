@@ -1,0 +1,61 @@
+data:
+  dataset_name: "planetswe"
+  data_dir: "/ehome/zhao/pretrain/mycode/dataset/datasets"
+  masking_strategy: "complement"
+  encoder_point_ratio: 0.5
+  downsample_factor: 2
+
+model:
+  coord_features: 2
+  field_features: 3
+  latent_features: 128
+  encoder_slice_num: 128
+  encoder_n_layers: 6
+  encoder_n_hidden: 128
+  decoder_n_self_layers: 3
+  decoder_slice_num: 128
+  decoder_n_cross_layers: 3
+  decoder_n_mlp_layers: 1
+  decoder_n_hidden: 128
+  # quantizer_cfg:
+  #   dim: 128
+  #   codebook_size: 1000
+  #   heads: 1
+  #   codebook_dim: 64  # codebook_dim * heads = latent_features (dim)
+  #   separate_codebook_per_head: False
+  #   threshold_ema_dead_code: 2
+  #   commitment_weight: 0.1
+
+training:
+  learning_rate: 1e-4
+  weight_decay: 1e-3
+  batch_size: 256
+  max_steps: 300000
+  warmup_steps: 1000
+  check_val_every_n_epoch: 1
+  save_every_n_train_steps: 10000
+  seed: 42
+  num_workers: 4
+  accelerator: "gpu"
+  devices: 4
+  strategy: "auto"
+  precision: "32"
+  gradient_clip_val: 1.0
+  accumulate_grad_batches: 1
+  beta: 0.000
+
+logging:
+  project: "Lion"
+  entity: "isfengzhao-cornell-university"
+  # save_every_n_steps: 5000
+  # checkpoint_every_n_steps: 5000 
+  output_dir: "checkpoints"
+
+
+# huggingface:
+#   push_to_hub: false
+#   repo_name: "zebra-vqvae1d"
+#   private: true
+#   commit_message: "Add VQVAE1D tokenizer"
+#   model_card: "tokenizer_model_card.md"
+#   model_card_template: "tokenizer_model_card.md"
